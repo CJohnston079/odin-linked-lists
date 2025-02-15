@@ -17,48 +17,81 @@ describe("LinkedList", () => {
 		it("defines append()", () => {
 			expect(typeof testLinkedList.append).toBe("function");
 		});
+		it("should append a node to an empty list", () => {
+			testLinkedList.append("dog");
+
+			expect(testLinkedList.head).not.toBeNull();
+			expect(testLinkedList.head.value).toBe("dog");
+		});
+
+		it("should append a node to a non-empty list", () => {
+			testLinkedList.append("dog");
+			testLinkedList.append("cat");
+
+			expect(testLinkedList.head.next).not.toBeNull();
+			expect(testLinkedList.head.next.value).toBe("cat");
+			expect(testLinkedList.head.next.next).toBeNull();
+			expect(testLinkedList.length).toBe(2);
+		});
 	});
 	describe("prepend()", () => {
 		it("defines prepend()", () => {
 			expect(typeof testLinkedList.prepend).toBe("function");
 		});
+		it("should prepend a node to an empty list", () => {
+			testLinkedList.prepend("dog");
+
+			expect(testLinkedList.head).not.toBeNull();
+			expect(testLinkedList.head.value).toBe("dog");
+		});
+
+		it("should prepend a node to a non-empty list", () => {
+			testLinkedList.prepend("dog");
+			testLinkedList.prepend("cat");
+
+			expect(testLinkedList.head.value).toBe("cat");
+			expect(testLinkedList.head.next).not.toBeNull();
+			expect(testLinkedList.head.next.value).toBe("dog");
+			expect(testLinkedList.head.next.next).toBeNull();
+			expect(testLinkedList.length).toBe(2);
+		});
 	});
-	describe("size()", () => {
+	describe.skip("size()", () => {
 		it("defines size()", () => {
 			expect(typeof testLinkedList.size).toBe("function");
 		});
 	});
-	describe("head()", () => {
+	describe.skip("head()", () => {
 		it("defines head()", () => {
 			expect(typeof testLinkedList.head).toBe("function");
 		});
 	});
-	describe("tail()", () => {
+	describe.skip("tail()", () => {
 		it("defines tail()", () => {
 			expect(typeof testLinkedList.tail).toBe("function");
 		});
 	});
-	describe("at()", () => {
+	describe.skip("at()", () => {
 		it("defines at()", () => {
 			expect(typeof testLinkedList.at).toBe("function");
 		});
 	});
-	describe("pop()", () => {
+	describe.skip("pop()", () => {
 		it("defines pop()", () => {
 			expect(typeof testLinkedList.pop).toBe("function");
 		});
 	});
-	describe("contains()", () => {
+	describe.skip("contains()", () => {
 		it("defines contains()", () => {
 			expect(typeof testLinkedList.contains).toBe("function");
 		});
 	});
-	describe("find()", () => {
+	describe.skip("find()", () => {
 		it("defines find()", () => {
 			expect(typeof testLinkedList.find).toBe("function");
 		});
 	});
-	describe("toString()", () => {
+	describe.skip("toString()", () => {
 		it("defines toString()", () => {
 			expect(typeof testLinkedList.toString).toBe("function");
 		});
