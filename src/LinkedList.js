@@ -2,17 +2,25 @@ import Node from "./Node";
 
 class LinkedList {
 	constructor(head = null) {
-		this.head = head;
-		this.length = 0;
+		this._head = head;
+		this._length = 0;
+	}
+
+	get head() {
+		return this._head;
+	}
+
+	get size() {
+		return this._length;
 	}
 
 	append(value) {
 		const node = new Node(value);
 
-		if (!this.head) {
-			this.head = node;
+		if (!this._head) {
+			this._head = node;
 		} else {
-			let current = this.head;
+			let current = this._head;
 
 			while (current.next) {
 				current = current.next;
@@ -21,18 +29,18 @@ class LinkedList {
 			current.setNext(node);
 		}
 
-		this.length += 1;
+		this._length += 1;
 	}
 
 	prepend(value) {
 		const node = new Node(value);
 
-		if (this.head) {
-			node.next = this.head;
+		if (this._head) {
+			node.next = this._head;
 		}
 
-		this.head = node;
-		this.length += 1;
+		this._head = node;
+		this._length += 1;
 	}
 }
 
