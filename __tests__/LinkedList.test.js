@@ -23,7 +23,6 @@ describe("LinkedList", () => {
 			expect(testLinkedList._head).not.toBeNull();
 			expect(testLinkedList._head.value).toBe("dog");
 		});
-
 		it("should append a node to a non-empty list", () => {
 			testLinkedList.append("dog");
 			testLinkedList.append("cat");
@@ -31,6 +30,11 @@ describe("LinkedList", () => {
 			expect(testLinkedList._head.next).not.toBeNull();
 			expect(testLinkedList._head.next.value).toBe("cat");
 			expect(testLinkedList._head.next.next).toBeNull();
+		});
+		it("increments _length when appending a node", () => {
+			testLinkedList.append("dog");
+			testLinkedList.append("cat");
+
 			expect(testLinkedList._length).toBe(2);
 		});
 	});
@@ -44,7 +48,6 @@ describe("LinkedList", () => {
 			expect(testLinkedList._head).not.toBeNull();
 			expect(testLinkedList._head.value).toBe("dog");
 		});
-
 		it("should prepend a node to a non-empty list", () => {
 			testLinkedList.prepend("dog");
 			testLinkedList.prepend("cat");
@@ -53,6 +56,11 @@ describe("LinkedList", () => {
 			expect(testLinkedList._head.next).not.toBeNull();
 			expect(testLinkedList._head.next.value).toBe("dog");
 			expect(testLinkedList._head.next.next).toBeNull();
+		});
+		it("increments _length when appending a node", () => {
+			testLinkedList.prepend("dog");
+			testLinkedList.prepend("cat");
+
 			expect(testLinkedList._length).toBe(2);
 		});
 	});
@@ -87,14 +95,48 @@ describe("LinkedList", () => {
 			expect(testLinkedList.size).toBe(2);
 		});
 	});
-	describe.skip("tail()", () => {
+	describe("tail()", () => {
 		it("defines tail()", () => {
 			expect(typeof testLinkedList.tail).toBe("function");
 		});
+		it("returns null for empty lists", () => {
+			expect(testLinkedList.tail()).toBeNull();
+		});
+		it("returns the last node for non-empty lists", () => {
+			const secondNode = { value: "cat", next: null };
+			const firstNode = { value: "dog", next: secondNode };
+
+			testLinkedList.append(firstNode.value);
+			testLinkedList.append(secondNode.value);
+
+			expect(testLinkedList.tail()).toEqual(secondNode);
+		});
 	});
-	describe.skip("at()", () => {
+	describe("at()", () => {
 		it("defines at()", () => {
 			expect(typeof testLinkedList.at).toBe("function");
+		});
+		it("returns null for empty lists", () => {
+			expect(testLinkedList.at()).toBeNull();
+		});
+		it("returns the node at the given index for non-empty lists", () => {
+			const thirdNode = { value: "parrot", next: null };
+			const secondNode = { value: "cat", next: thirdNode };
+			const firstNode = { value: "dog", next: secondNode };
+
+			testLinkedList.append(firstNode.value);
+			testLinkedList.append(secondNode.value);
+			testLinkedList.append(thirdNode.value);
+
+			expect(testLinkedList.at(0)).toEqual(firstNode);
+			expect(testLinkedList.at(1)).toEqual(secondNode);
+			expect(testLinkedList.at(2)).toEqual(thirdNode);
+		});
+		it("throws 'out of bounds' error if index is greater than list length", () => {
+			testLinkedList.append("dog");
+			expect(() => {
+				testLinkedList.at(1);
+			}).toThrow(/.*out of bounds.*/);
 		});
 	});
 	describe.skip("pop()", () => {
