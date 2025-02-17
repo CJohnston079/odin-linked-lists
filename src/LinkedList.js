@@ -78,6 +78,23 @@ class LinkedList {
 			current = current.next;
 		}
 	}
+
+	pop() {
+		if (!this._head) {
+			throw new Error(`Cannot pop from an empty list.`);
+		}
+
+		let current = this._head;
+
+		while (current.next.next) {
+			current = current.next;
+		}
+
+		current.next = null;
+		this._length -= 1;
+
+		return;
+	}
 }
 
 export default LinkedList;
