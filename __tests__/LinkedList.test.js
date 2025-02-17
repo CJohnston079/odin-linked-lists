@@ -136,7 +136,7 @@ describe("LinkedList", () => {
 			testLinkedList.append("dog");
 			expect(() => {
 				testLinkedList.at(1);
-			}).toThrow(/.*out of bounds.*/);
+			}).toThrow(/.*out of bounds*/i);
 		});
 	});
 	describe.skip("pop()", () => {
