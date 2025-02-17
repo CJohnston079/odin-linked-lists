@@ -42,6 +42,42 @@ class LinkedList {
 		this._head = node;
 		this._length += 1;
 	}
+
+	tail() {
+		if (!this._head) {
+			return null;
+		}
+
+		let current = this._head;
+
+		while (current.next) {
+			current = current.next;
+		}
+
+		return current;
+	}
+
+	at(index) {
+		if (!this._head) {
+			return null;
+		}
+
+		if (index >= this._length) {
+			throw new Error(
+				`Index is out of bounds. Index (${index}) should be less than or equal to length (${this._length}).`
+			);
+		}
+
+		let current = this._head;
+
+		for (let i = 0; i < this._length; i += 1) {
+			if (i === index) {
+				return current;
+			}
+
+			current = current.next;
+		}
+	}
 }
 
 export default LinkedList;
