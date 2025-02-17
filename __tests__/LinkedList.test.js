@@ -139,9 +139,42 @@ describe("LinkedList", () => {
 			}).toThrow(/.*out of bounds*/i);
 		});
 	});
-	describe.skip("pop()", () => {
+	describe("pop()", () => {
 		it("defines pop()", () => {
 			expect(typeof testLinkedList.pop).toBe("function");
+		});
+		it("removes the last node from the list", () => {
+			const thirdNode = { value: "parrot", next: null };
+			const secondNode = { value: "cat", next: thirdNode };
+			const firstNode = { value: "dog", next: secondNode };
+
+			testLinkedList.append(firstNode.value);
+			testLinkedList.append(secondNode.value);
+			testLinkedList.append(thirdNode.value);
+
+			testLinkedList.pop();
+
+			expect(testLinkedList.tail()).toEqual({ value: secondNode.value, next: null });
+		});
+		it("decrements length when popping a node", () => {
+			const thirdNode = { value: "parrot", next: null };
+			const secondNode = { value: "cat", next: thirdNode };
+			const firstNode = { value: "dog", next: secondNode };
+
+			testLinkedList.append(firstNode.value);
+			testLinkedList.append(secondNode.value);
+			testLinkedList.append(thirdNode.value);
+
+			expect(testLinkedList._length).toBe(3);
+
+			testLinkedList.pop();
+
+			expect(testLinkedList._length).toBe(2);
+		});
+		it("throws an error when attempting to pop from an empty list", () => {
+			expect(() => {
+				testLinkedList.pop();
+			}).toThrow(/.*empty list.*/i);
 		});
 	});
 	describe.skip("contains()", () => {
