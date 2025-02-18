@@ -171,9 +171,16 @@ describe("LinkedList", () => {
 			expect(testLinkedList.find("parrot")).toBe(2);
 		});
 	});
-	describe.skip("toString()", () => {
+	describe.only("toString()", () => {
 		it("defines toString()", () => {
-			expect(typeof emptyLinkedList.toString).toBe("function");
+			expect(LinkedList.prototype.hasOwnProperty("toString")).toBe(true);
+		});
+		it("returns an empty string for empty lists", () => {
+			expect(emptyLinkedList.toString()).toBe("");
+		});
+		it("returns nodes in the format '( value ) -> ( value ) -> null' for non-empty lists", () => {
+			const expected = "( dog ) -> ( cat ) -> ( parrot ) -> null";
+			expect(testLinkedList.toString()).toBe(expected);
 		});
 	});
 });
