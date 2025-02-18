@@ -113,6 +113,24 @@ class LinkedList {
 
 		return false;
 	}
+
+	find(value) {
+		if (!this._head) {
+			return null;
+		}
+
+		let current = this._head;
+
+		for (let i = 0; i < this._length; i += 1) {
+			if (current.value === value) {
+				return i;
+			}
+
+			current = current.next;
+		}
+
+		return null;
+	}
 }
 
 export default LinkedList;
