@@ -42,8 +42,9 @@ describe("LinkedList", () => {
 			expect(emptyLinkedList._head.next.next).toBeNull();
 		});
 		it("increments _length when appending a node", () => {
+			const startingLength = emptyLinkedList._length;
 			emptyLinkedList.append("dog");
-			expect(emptyLinkedList._length).toBe(1);
+			expect(emptyLinkedList._length).toBe(startingLength + 1);
 		});
 	});
 	describe("prepend()", () => {
@@ -66,8 +67,9 @@ describe("LinkedList", () => {
 			expect(emptyLinkedList._head.next.next).toBeNull();
 		});
 		it("increments _length when appending a node", () => {
+			const startingLength = emptyLinkedList._length;
 			emptyLinkedList.prepend("dog");
-			expect(emptyLinkedList._length).toBe(1);
+			expect(emptyLinkedList._length).toBe(startingLength + 1);
 		});
 	});
 	describe("head", () => {
@@ -130,8 +132,9 @@ describe("LinkedList", () => {
 			expect(testLinkedList.tail()).toEqual({ value: "cat", next: null });
 		});
 		it("decrements length when popping a node", () => {
+			const startingLength = testLinkedList._length;
 			testLinkedList.pop();
-			expect(testLinkedList._length).toBe(2);
+			expect(testLinkedList._length).toBe(startingLength - 1);
 		});
 		it("throws an error when attempting to pop from an empty list", () => {
 			expect(() => {
@@ -183,7 +186,7 @@ describe("LinkedList", () => {
 			expect(testLinkedList.toString()).toBe(expected);
 		});
 	});
-	describe.only("insertAt", () => {
+	describe("insertAt", () => {
 		it("defines insertAt()", () => {
 			expect(typeof emptyLinkedList.insertAt).toBe("function");
 		});
@@ -205,6 +208,53 @@ describe("LinkedList", () => {
 		it("throws 'out of bounds' error if index is greater than list length", () => {
 			expect(() => {
 				testLinkedList.insertAt("hamster", 4);
+			}).toThrow(/.*out of bounds*/i);
+		});
+	});
+	describe("removeAt()", () => {
+		it("defines removeAt()", () => {
+			expect(typeof emptyLinkedList.removeAt).toBe("function");
+		});
+
+		it("removes a node from the list at the given index", () => {
+			testLinkedList.removeAt(1);
+
+			expect(testLinkedList.contains("cat")).toBe(false);
+
+			expect(testLinkedList.at(1).value).toBe("parrot");
+		});
+
+		it("removes the first node of a list", () => {
+			testLinkedList.removeAt(0);
+
+			expect(testLinkedList._head.value).toBe("cat");
+		});
+
+		it("removes the last node of a list", () => {
+			const lastNodeIndex = testLinkedList._length - 1;
+
+			testLinkedList.removeAt(lastNodeIndex);
+
+			expect(testLinkedList.tail()).toEqual({ value: "cat", next: null });
+		});
+
+		it("decrements length when removing node", () => {
+			const startingLength = testLinkedList._length;
+
+			testLinkedList.removeAt(1);
+
+			expect(testLinkedList._length).toBe(startingLength - 1);
+		});
+
+		it("throws an error when attempting to pop from an empty list", () => {
+			expect(() => {
+				emptyLinkedList.removeAt(2);
+			}).toThrow(/.*empty list.*/i);
+		});
+
+		it("throws 'out of bounds' error if index is greater than list length", () => {
+			expect(() => {
+				testLinkedList.removeAt(4);
 			}).toThrow(/.*out of bounds*/i);
 		});
 	});
