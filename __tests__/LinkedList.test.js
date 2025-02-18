@@ -183,4 +183,29 @@ describe("LinkedList", () => {
 			expect(testLinkedList.toString()).toBe(expected);
 		});
 	});
+	describe.only("insertAt", () => {
+		it("defines insertAt()", () => {
+			expect(typeof emptyLinkedList.insertAt).toBe("function");
+		});
+		it("inserts a node with the given value at the given index", () => {
+			testLinkedList.insertAt("hamster", 1);
+			expect(testLinkedList.find("hamster")).toBe(1);
+			expect(testLinkedList._head.next.next.value).toBe("cat");
+		});
+		it("inserts a node with the given value at the last index", () => {
+			testLinkedList.insertAt("hamster", 3);
+			expect(testLinkedList.find("hamster")).toBe(3);
+			expect(testLinkedList.tail().next).toBeNull();
+		});
+		it("increments _length when inserting a node", () => {
+			const startLength = testLinkedList._length;
+			testLinkedList.insertAt("hamster", 1);
+			expect(testLinkedList._length).toBe(startLength + 1);
+		});
+		it("throws 'out of bounds' error if index is greater than list length", () => {
+			expect(() => {
+				testLinkedList.insertAt("hamster", 4);
+			}).toThrow(/.*out of bounds*/i);
+		});
+	});
 });
