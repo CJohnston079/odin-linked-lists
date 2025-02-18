@@ -155,9 +155,20 @@ describe("LinkedList", () => {
 			expect(testLinkedList.contains("parrot")).toBe(true);
 		});
 	});
-	describe.skip("find()", () => {
+	describe("find()", () => {
 		it("defines find()", () => {
 			expect(typeof emptyLinkedList.find).toBe("function");
+		});
+		it("returns null for empty lists", () => {
+			expect(emptyLinkedList.find("dog")).toBe(null);
+		});
+		it("returns null if value is not found", () => {
+			expect(testLinkedList.find("hamster")).toBe(null);
+		});
+		it("returns the index of found values", () => {
+			expect(testLinkedList.find("dog")).toBe(0);
+			expect(testLinkedList.find("cat")).toBe(1);
+			expect(testLinkedList.find("parrot")).toBe(2);
 		});
 	});
 	describe.skip("toString()", () => {
