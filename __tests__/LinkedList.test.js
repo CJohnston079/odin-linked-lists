@@ -139,9 +139,20 @@ describe("LinkedList", () => {
 			}).toThrow(/.*empty list.*/i);
 		});
 	});
-	describe.skip("contains()", () => {
+	describe("contains()", () => {
 		it("defines contains()", () => {
 			expect(typeof emptyLinkedList.contains).toBe("function");
+		});
+		it("returns false for empty lists", () => {
+			expect(emptyLinkedList.contains("dog")).toBe(false);
+		});
+		it("returns false if value is not in the list", () => {
+			expect(testLinkedList.contains("hamster")).toBe(false);
+		});
+		it("returns true if value is in the list", () => {
+			expect(testLinkedList.contains("dog")).toBe(true);
+			expect(testLinkedList.contains("cat")).toBe(true);
+			expect(testLinkedList.contains("parrot")).toBe(true);
 		});
 	});
 	describe.skip("find()", () => {
