@@ -171,7 +171,7 @@ describe("LinkedList", () => {
 			expect(testLinkedList.find("parrot")).toBe(2);
 		});
 	});
-	describe.only("toString()", () => {
+	describe("toString()", () => {
 		it("defines toString()", () => {
 			expect(LinkedList.prototype.hasOwnProperty("toString")).toBe(true);
 		});
