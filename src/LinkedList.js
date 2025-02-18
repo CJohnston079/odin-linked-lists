@@ -95,6 +95,24 @@ class LinkedList {
 
 		return;
 	}
+
+	contains(value) {
+		if (!this._head) {
+			return false;
+		}
+
+		let current = this._head;
+
+		while (current) {
+			if (current.value === value) {
+				return true;
+			}
+
+			current = current.next;
+		}
+
+		return false;
+	}
 }
 
 export default LinkedList;
