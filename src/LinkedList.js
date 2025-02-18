@@ -148,6 +148,32 @@ class LinkedList {
 		return (str += "null");
 	}
 
+	insertAt(value, index) {
+		if (index > this._length) {
+			throw new Error(
+				`Index is out of bounds. Index (${index}) should be less than or equal to length (${this._length}).`
+			);
+		}
+
+		const node = new Node(value);
+
+		let current = this._head;
+
+		for (let i = 0; i < this._length; i += 1) {
+			if (i + 1 === index) {
+				node.next = current.next;
+				current.next = node;
+				this._length += 1;
+
+				return;
+			}
+
+			current = current.next;
+		}
+
+		return;
+	}
+
 	removeAt(index) {
 		if (!this._head) {
 			throw new Error(`Cannot remove a node from an empty list.`);
@@ -161,6 +187,7 @@ class LinkedList {
 
 		if (index === 0) {
 			this._head = this._head.next;
+
 			this._length -= 1;
 
 			return;
@@ -171,6 +198,7 @@ class LinkedList {
 		for (let i = 0; i < this._length; i += 1) {
 			if (i + 1 === index) {
 				current.next = current.next.next;
+
 				this._length -= 1;
 
 				return;

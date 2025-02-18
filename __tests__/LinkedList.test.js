@@ -186,34 +186,72 @@ describe("LinkedList", () => {
 			expect(testLinkedList.toString()).toBe(expected);
 		});
 	});
+	describe("insertAt", () => {
+		it("defines insertAt()", () => {
+			expect(typeof emptyLinkedList.insertAt).toBe("function");
+		});
+		it("inserts a node with the given value at the given index", () => {
+			testLinkedList.insertAt("hamster", 1);
+			expect(testLinkedList.find("hamster")).toBe(1);
+			expect(testLinkedList._head.next.next.value).toBe("cat");
+		});
+		it("inserts a node with the given value at the last index", () => {
+			testLinkedList.insertAt("hamster", 3);
+			expect(testLinkedList.find("hamster")).toBe(3);
+			expect(testLinkedList.tail().next).toBeNull();
+		});
+		it("increments _length when inserting a node", () => {
+			const startLength = testLinkedList._length;
+			testLinkedList.insertAt("hamster", 1);
+			expect(testLinkedList._length).toBe(startLength + 1);
+		});
+		it("throws 'out of bounds' error if index is greater than list length", () => {
+			expect(() => {
+				testLinkedList.insertAt("hamster", 4);
+			}).toThrow(/.*out of bounds*/i);
+		});
+	});
 	describe("removeAt()", () => {
 		it("defines removeAt()", () => {
 			expect(typeof emptyLinkedList.removeAt).toBe("function");
 		});
+
 		it("removes a node from the list at the given index", () => {
 			testLinkedList.removeAt(1);
+
 			expect(testLinkedList.contains("cat")).toBe(false);
+
 			expect(testLinkedList.at(1).value).toBe("parrot");
 		});
+
 		it("removes the first node of a list", () => {
 			testLinkedList.removeAt(0);
+
 			expect(testLinkedList._head.value).toBe("cat");
 		});
+
 		it("removes the last node of a list", () => {
 			const lastNodeIndex = testLinkedList._length - 1;
+
 			testLinkedList.removeAt(lastNodeIndex);
+
 			expect(testLinkedList.tail()).toEqual({ value: "cat", next: null });
 		});
+
 		it("decrements length when removing node", () => {
 			const startingLength = testLinkedList._length;
+
 			testLinkedList.removeAt(1);
+
 			expect(testLinkedList._length).toBe(startingLength - 1);
 		});
+
 		it("throws an error when attempting to pop from an empty list", () => {
 			expect(() => {
 				emptyLinkedList.removeAt(2);
 			}).toThrow(/.*empty list.*/i);
 		});
+
 		it("throws 'out of bounds' error if index is greater than list length", () => {
 			expect(() => {
 				testLinkedList.removeAt(4);
