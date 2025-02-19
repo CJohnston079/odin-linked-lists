@@ -80,7 +80,7 @@ describe("LinkedList", () => {
 			expect(emptyLinkedList.head).toBeNull();
 		});
 		it("returns the first node for non-empty lists", () => {
-			expect(testLinkedList.head).toEqual(headNode);
+			expect(testLinkedList.head).toBe(headNode.value);
 		});
 	});
 	describe("size", () => {
@@ -102,7 +102,7 @@ describe("LinkedList", () => {
 			expect(emptyLinkedList.tail()).toBeNull();
 		});
 		it("returns the last node for non-empty lists", () => {
-			expect(testLinkedList.tail()).toEqual(tailNode);
+			expect(testLinkedList.tail()).toBe(tailNode.value);
 		});
 	});
 	describe("at()", () => {
@@ -113,9 +113,9 @@ describe("LinkedList", () => {
 			expect(emptyLinkedList.at()).toBeNull();
 		});
 		it("returns the node at the given index for non-empty lists", () => {
-			expect(testLinkedList.at(0)).toEqual(headNode);
-			expect(testLinkedList.at(1)).toEqual(midNode);
-			expect(testLinkedList.at(2)).toEqual(tailNode);
+			expect(testLinkedList.at(0)).toBe(headNode.value);
+			expect(testLinkedList.at(1)).toBe(midNode.value);
+			expect(testLinkedList.at(2)).toBe(tailNode.value);
 		});
 		it("throws 'out of bounds' error if index is greater than list length", () => {
 			expect(() => {
@@ -129,7 +129,7 @@ describe("LinkedList", () => {
 		});
 		it("removes the last node from the list", () => {
 			testLinkedList.pop();
-			expect(testLinkedList.tail()).toEqual({ value: "cat", next: null });
+			expect(testLinkedList.tail()).toBe(midNode.value);
 		});
 		it("decrements length when popping a node", () => {
 			const startingLength = testLinkedList._length;
@@ -198,7 +198,7 @@ describe("LinkedList", () => {
 		it("inserts a node with the given value at the last index", () => {
 			testLinkedList.insertAt("hamster", 3);
 			expect(testLinkedList.find("hamster")).toBe(3);
-			expect(testLinkedList.tail().next).toBeNull();
+			expect(testLinkedList._head.next.next.next.next).toBeNull();
 		});
 		it("increments _length when inserting a node", () => {
 			const startLength = testLinkedList._length;
@@ -221,7 +221,7 @@ describe("LinkedList", () => {
 
 			expect(testLinkedList.contains("cat")).toBe(false);
 
-			expect(testLinkedList.at(1).value).toBe("parrot");
+			expect(testLinkedList.at(1)).toBe("parrot");
 		});
 
 		it("removes the first node of a list", () => {
@@ -235,7 +235,7 @@ describe("LinkedList", () => {
 
 			testLinkedList.removeAt(lastNodeIndex);
 
-			expect(testLinkedList.tail()).toEqual({ value: "cat", next: null });
+			expect(testLinkedList.tail()).toBe(midNode.value);
 		});
 
 		it("decrements length when removing node", () => {
