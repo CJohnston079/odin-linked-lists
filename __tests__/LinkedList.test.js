@@ -215,43 +215,30 @@ describe("LinkedList", () => {
 		it("defines removeAt()", () => {
 			expect(typeof emptyLinkedList.removeAt).toBe("function");
 		});
-
 		it("removes a node from the list at the given index", () => {
 			testLinkedList.removeAt(1);
-
 			expect(testLinkedList.contains("cat")).toBe(false);
-
 			expect(testLinkedList.at(1)).toBe("parrot");
 		});
-
 		it("removes the first node of a list", () => {
 			testLinkedList.removeAt(0);
-
 			expect(testLinkedList._head.value).toBe("cat");
 		});
-
 		it("removes the last node of a list", () => {
 			const lastNodeIndex = testLinkedList._length - 1;
-
 			testLinkedList.removeAt(lastNodeIndex);
-
 			expect(testLinkedList.tail()).toBe(midNode.value);
 		});
-
 		it("decrements length when removing node", () => {
 			const startingLength = testLinkedList._length;
-
 			testLinkedList.removeAt(1);
-
 			expect(testLinkedList._length).toBe(startingLength - 1);
 		});
-
 		it("throws an error when attempting to pop from an empty list", () => {
 			expect(() => {
 				emptyLinkedList.removeAt(2);
 			}).toThrow(/.*empty list.*/i);
 		});
-
 		it("throws 'out of bounds' error if index is greater than list length", () => {
 			expect(() => {
 				testLinkedList.removeAt(4);
