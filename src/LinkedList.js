@@ -7,7 +7,7 @@ class LinkedList {
 	}
 
 	get head() {
-		return this._head;
+		return this._head ? this._head.value : null;
 	}
 
 	get size() {
@@ -54,7 +54,7 @@ class LinkedList {
 			current = current.next;
 		}
 
-		return current;
+		return current.value;
 	}
 
 	at(index) {
@@ -72,7 +72,7 @@ class LinkedList {
 
 		for (let i = 0; i < this._length; i += 1) {
 			if (i === index) {
-				return current;
+				return current.value;
 			}
 
 			current = current.next;
